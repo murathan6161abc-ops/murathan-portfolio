@@ -24,6 +24,7 @@
         <li><a href="#about">Hakkımda</a></li>
         <li><a href="#projects">Projeler</a></li>
         <li><a href="#focus">Odak Alanları</a></li>
+        <li><a href="#contact">İletişim</a></li>
       </ul>
     </nav>
     <button class="menu-toggle" type="button" aria-label="Menüyü aç" aria-controls="navLinks" aria-expanded="false">
@@ -35,19 +36,41 @@
 <main>
   <section id="home" class="hero">
     <div class="container hero-inner">
-      <div class="hero-copy">
-        <p class="hero-eyebrow">Trabzon Fen Lisesi öğrencisi</p>
-        <h1>Murathan</h1>
-        <p class="hero-subtitle">
-          Yazılımı, ürün tasarımını ve analitik düşünceyi gerçek problemlere
-          uygulanabilir çözümler üretmek için bir araya getiriyorum.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">Projelerimi Gör</a>
-          <a href="#about" class="btn btn-secondary">Beni Tanı</a>
+      <div class="hero-main">
+        <div class="hero-copy">
+          <p class="hero-eyebrow"><span class="status-dot" aria-hidden="true"></span> Yeni fikirler üzerinde çalışıyorum</p>
+          <h1>Murathan</h1>
+          <p class="hero-role">Öğrenci geliştirici &amp; ürün tasarımcısı</p>
+          <p class="hero-subtitle">
+            Yazılımı, ürün tasarımını ve analitik düşünceyi gerçek problemlere
+            uygulanabilir çözümler üretmek için bir araya getiriyorum.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">Seçili Projeler <span aria-hidden="true">&#8595;</span></a>
+            <a href="https://github.com/murathan6161abc-ops" class="btn btn-secondary" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">&#8599;</span></a>
+          </div>
         </div>
-      </div>
 
+        <aside class="build-panel" aria-label="Üretim yaklaşımı">
+          <div class="panel-bar">
+            <span>WORKFLOW / 01</span>
+            <span class="panel-status">ACTIVE</span>
+          </div>
+          <div class="panel-body">
+            <p class="panel-label">Problemden ürüne</p>
+            <ol class="workflow-list">
+              <li><span>01</span><strong>Problemi araştır</strong></li>
+              <li><span>02</span><strong>Çözümü tasarla</strong></li>
+              <li><span>03</span><strong>Prototipi geliştir</strong></li>
+              <li><span>04</span><strong>Test et ve anlat</strong></li>
+            </ol>
+            <div class="panel-footer">
+              <span>TRABZON / TR</span>
+              <span>2026</span>
+            </div>
+          </div>
+        </aside>
+      </div>
       <dl class="hero-facts" aria-label="Öne çıkan çalışma alanları">
         <div>
           <dt>Yazılım</dt>
@@ -113,12 +136,23 @@
   <section id="projects" class="section section-alt">
     <div class="container">
       <p class="section-kicker">Seçili çalışmalar</p>
-      <h2 class="section-title">Projeler</h2>
+      <div class="section-heading">
+        <h2 class="section-title">Projeler</h2>
+        <p>Günlük yaşamdan ekip yönetimine uzanan problemlere geliştirdiğim seçili çözümler.</p>
+      </div>
       <div class="project-grid">
         <article class="project-card">
-          <p class="project-type">Mobil ürün</p>
+          <div class="project-visual visual-pantry" aria-hidden="true">
+            <span class="visual-code">MK / 01</span>
+            <div class="phone-frame">
+              <span class="phone-title">Kiler</span>
+              <i></i><i></i><i></i>
+              <b></b>
+            </div>
+          </div>
+          <div class="project-meta"><p class="project-type">Mobil ürün</p><span>Konsept &amp; tasarım</span></div>
           <h3>Mobile Kiler</h3>
-          <p>
+          <p class="project-description">
             Evdeki gıdaları QR kodlarla takip ederek ürünlerin görünürlüğünü artırmayı
             ve gıda israfını azaltmayı amaçlayan mobil uygulama tasarımı.
           </p>
@@ -130,9 +164,17 @@
         </article>
 
         <article class="project-card">
-          <p class="project-type">Yönetim platformu</p>
+          <div class="project-visual visual-dashboard" aria-hidden="true">
+            <span class="visual-code">TP / 02</span>
+            <div class="dashboard-frame">
+              <i></i>
+              <b></b><b></b><b></b>
+              <em></em><em></em>
+            </div>
+          </div>
+          <div class="project-meta"><p class="project-type">Yönetim platformu</p><span>Geliştirme</span></div>
           <h3>Teknoloji Takımı Platformu</h3>
-          <p>
+          <p class="project-description">
             Elektronik, finans, PR ve CAD departmanlarının görev, süreç ve raporlarını
             ortak bir yapıda takip etmek için geliştirilen yönetim sistemi.
           </p>
@@ -144,9 +186,16 @@
         </article>
 
         <article class="project-card">
-          <p class="project-type">Akademik çalışma</p>
+          <div class="project-visual visual-finance" aria-hidden="true">
+            <span class="visual-code">FP / 03</span>
+            <div class="chart-frame">
+              <i></i><i></i><i></i><i></i><i></i>
+              <b></b>
+            </div>
+          </div>
+          <div class="project-meta"><p class="project-type">Akademik çalışma</p><span>Araştırma</span></div>
           <h3>Finansal Planlama Araştırması</h3>
-          <p>
+          <p class="project-description">
             Bileşik faiz ve opsiyon fiyatlama modellerini rasyonel ve irrasyonel
             sayılarla ilişkilendiren disiplinler arası matematik projesi.
           </p>
@@ -201,12 +250,25 @@
       </div>
     </div>
   </section>
+
+  <section id="contact" class="contact-section">
+    <div class="container contact-layout">
+      <div>
+        <p class="section-kicker">Birlikte üretelim</p>
+        <h2>Yeni fikirlere ve iş birliklerine açığım.</h2>
+      </div>
+      <div class="contact-action">
+        <p>Projelerimi incelemek veya geliştirdiğim çalışmalar hakkında konuşmak için GitHub profilime ulaşabilirsin.</p>
+        <a href="https://github.com/murathan6161abc-ops" class="btn btn-primary" target="_blank" rel="noreferrer">GitHub Profilim <span aria-hidden="true">&#8599;</span></a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
   <div class="container footer-inner">
     <p>&copy; <span id="year"></span> Murathan.</p>
-    <p>Merak et, tasarla, geliştir.</p>
+    <a href="https://github.com/murathan6161abc-ops" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">&#8599;</span></a>
   </div>
 </footer>
 
