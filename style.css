@@ -763,6 +763,13 @@ button:focus-visible {
   font-weight: 750;
 }
 
+.lichess-icon {
+  background: #302d28;
+  color: #d8c9ad;
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+}
+
 .social-link small {
   display: block;
   color: var(--text-dim);
