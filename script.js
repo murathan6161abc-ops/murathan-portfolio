@@ -9,6 +9,35 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
+const scrollProgress = document.getElementById('scrollProgress');
+const heroAurora = document.querySelector('.hero-aurora');
+let scrollTicking = false;
+
+function updateOnScroll() {
+  const scrollTop = window.scrollY;
+
+  if (scrollProgress) {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollProgress.style.width = `${progress}%`;
+  }
+
+  if (heroAurora && !prefersReducedMotion.matches) {
+    heroAurora.style.transform = `translateY(${scrollTop * 0.25}px)`;
+  }
+
+  scrollTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if (!scrollTicking) {
+    requestAnimationFrame(updateOnScroll);
+    scrollTicking = true;
+  }
+}, { passive: true });
+
+updateOnScroll();
+
 if (!prefersReducedMotion.matches) {
   document.documentElement.classList.add('motion-ready');
 
