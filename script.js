@@ -62,6 +62,127 @@ if ('IntersectionObserver' in window && sections.length > 0) {
   sections.forEach((section) => sectionObserver.observe(section));
 }
 
+const SUPABASE_URL = 'https://ecdepmneetjbwrzsgbvi.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZGVwbW5lZXRqYndyenNnYnZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAwOTY3NzAsImV4cCI6MjEwNTY3Mjc3MH0._qPx7yCPQo1yGk8xmW2ezKpDKiksouiO434YBdQKf7M';
+
+const commentForm = document.getElementById('commentForm');
+const commentList = document.getElementById('commentList');
+const commentStatus = document.getElementById('commentStatus');
+
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  }[char]));
+}
+
+function formatCommentDate(isoString) {
+  return new Date(isoString).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function renderComments(comments) {
+  if (!commentList) return;
+
+  if (comments.length === 0) {
+    commentList.innerHTML = '<li class="comment-empty">Henüz yorum yok, ilk yorumu sen bırak.</li>';
+    return;
+  }
+
+  commentList.innerHTML = comments.map((comment) => `
+    <li class="comment-item">
+      <div class="comment-item-head">
+        <span class="comment-author">${escapeHtml(comment.username)}</span>
+        <span class="comment-date">${formatCommentDate(comment.created_at)}</span>
+      </div>
+      <p class="comment-message">${escapeHtml(comment.message)}</p>
+    </li>
+  `).join('');
+}
+
+async function loadComments() {
+  if (!commentList) return;
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/comments?select=username,message,created_at&order=created_at.desc`, {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+    });
+    if (!response.ok) throw new Error('load-failed');
+    renderComments(await response.json());
+  } catch (error) {
+    commentList.innerHTML = '<li class="comment-empty">Yorumlar yüklenemedi, sayfayı yenilemeyi dene.</li>';
+  }
+}
+
+if (commentForm && commentStatus) {
+  loadComments();
+
+  commentForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submitButton = commentForm.querySelector('button[type="submit"]');
+    const username = document.getElementById('commentUsername').value.trim();
+    const message = document.getElementById('commentMessage').value.trim();
+
+    if (!username || !message) return;
+
+    submitButton.disabled = true;
+    commentStatus.textContent = 'Gönderiliyor...';
+
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/comments`, {
+        method: 'POST',
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify({ username, message }),
+      });
+
+      if (!response.ok) throw new Error('submit-failed');
+
+      commentStatus.textContent = 'Yorumun eklendi, teşekkürler!';
+      commentForm.reset();
+      loadComments();
+    } catch (error) {
+      commentStatus.textContent = 'Yorum gönderilemedi, tekrar dener misin?';
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+}
+
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+
+if (contactForm && formStatus) {
+  contactForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    formStatus.textContent = 'Gönderiliyor...';
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${contactForm.action.split('/').pop()}`, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(contactForm),
+      });
+
+      if (!response.ok) throw new Error('request-failed');
+
+      formStatus.textContent = 'Mesajın için teşekkürler! En kısa sürede dönüş yapacağım.';
+      contactForm.reset();
+    } catch (error) {
+      formStatus.textContent = 'Bir şeyler ters gitti. Doğrudan murathan6161abc@gmail.com adresine yazabilirsin.';
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+}
+
 if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {
     const isOpen = navLinks.classList.toggle('open');
