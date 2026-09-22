@@ -128,10 +128,81 @@ button:focus-visible {
 }
 
 .hero {
+  position: relative;
   min-height: calc(82svh - 64px);
   display: flex;
   align-items: center;
+  overflow: hidden;
   border-bottom: 1px solid var(--border);
+}
+
+.hero-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.28;
+  will-change: transform;
+}
+
+.orb-1 {
+  top: -12%;
+  left: 6%;
+  width: 380px;
+  height: 380px;
+  background: var(--accent);
+  animation: orb-drift-1 22s ease-in-out infinite;
+}
+
+.orb-2 {
+  top: 30%;
+  right: -8%;
+  width: 320px;
+  height: 320px;
+  background: var(--purple);
+  animation: orb-drift-2 26s ease-in-out infinite;
+}
+
+.orb-3 {
+  bottom: -18%;
+  left: 32%;
+  width: 340px;
+  height: 340px;
+  background: var(--blue);
+  animation: orb-drift-3 30s ease-in-out infinite;
+}
+
+.hero-spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(480px circle at var(--spot-x, 50%) var(--spot-y, 30%), rgba(101, 223, 169, 0.09), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.hero:hover .hero-spotlight {
+  opacity: 1;
+}
+
+.hero-inner,
+.hero > .hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb {
+    animation: none;
+  }
 }
 
 .hero-inner {
@@ -1162,6 +1233,21 @@ button:focus-visible {
   15% { opacity: 0.85; }
   90% { opacity: 0.4; }
   100% { bottom: 80px; opacity: 0; }
+}
+
+@keyframes orb-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 40px) scale(1.12); }
+}
+
+@keyframes orb-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, 60px) scale(1.08); }
+}
+
+@keyframes orb-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -50px) scale(1.15); }
 }
 
 @media (max-width: 860px) {

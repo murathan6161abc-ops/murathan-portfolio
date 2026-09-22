@@ -62,6 +62,18 @@ if ('IntersectionObserver' in window && sections.length > 0) {
   sections.forEach((section) => sectionObserver.observe(section));
 }
 
+const hero = document.querySelector('.hero');
+
+if (hero && !prefersReducedMotion.matches) {
+  hero.addEventListener('pointermove', (event) => {
+    const rect = hero.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    hero.style.setProperty('--spot-x', `${x}%`);
+    hero.style.setProperty('--spot-y', `${y}%`);
+  });
+}
+
 const SUPABASE_URL = 'https://ecdepmneetjbwrzsgbvi.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjZGVwbW5lZXRqYndyenNnYnZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAwOTY3NzAsImV4cCI6MjEwNTY3Mjc3MH0._qPx7yCPQo1yGk8xmW2ezKpDKiksouiO434YBdQKf7M';
 
