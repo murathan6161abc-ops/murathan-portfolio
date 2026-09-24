@@ -287,6 +287,16 @@ button:focus-visible {
   font-weight: 650;
 }
 
+.typed-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  background: var(--accent);
+  vertical-align: -0.15em;
+  animation: cursor-blink 0.9s steps(1) infinite;
+}
+
 .achievement-panel {
   overflow: hidden;
   border: 1px solid var(--border);
@@ -326,13 +336,36 @@ button:focus-visible {
   color: var(--warm);
 }
 
-.motion-ready .hero-copy {
-  animation: hero-enter 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
 .motion-ready .achievement-panel {
   animation: panel-enter 0.85s 0.14s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+.motion-ready .logo,
+.motion-ready .nav-links li,
+.motion-ready .menu-toggle,
+.motion-ready .hero-eyebrow,
+.motion-ready .hero h1,
+.motion-ready .hero-role,
+.motion-ready .hero-subtitle,
+.motion-ready .hero-actions .btn {
+  opacity: 0;
+  animation: load-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.motion-ready .logo { animation-delay: 0.05s; }
+.motion-ready .nav-links li:nth-child(1) { animation-delay: 0.12s; }
+.motion-ready .nav-links li:nth-child(2) { animation-delay: 0.17s; }
+.motion-ready .nav-links li:nth-child(3) { animation-delay: 0.22s; }
+.motion-ready .nav-links li:nth-child(4) { animation-delay: 0.27s; }
+.motion-ready .nav-links li:nth-child(5) { animation-delay: 0.32s; }
+.motion-ready .nav-links li:nth-child(6) { animation-delay: 0.37s; }
+.motion-ready .menu-toggle { animation-delay: 0.14s; }
+.motion-ready .hero-eyebrow { animation-delay: 0.46s; }
+.motion-ready .hero h1 { animation-delay: 0.53s; }
+.motion-ready .hero-role { animation-delay: 0.61s; }
+.motion-ready .hero-subtitle { animation-delay: 0.69s; }
+.motion-ready .hero-actions .btn:nth-child(1) { animation-delay: 0.77s; }
+.motion-ready .hero-actions .btn:nth-child(2) { animation-delay: 0.83s; }
 
 .hero-actions {
   display: flex;
@@ -1199,9 +1232,13 @@ button:focus-visible {
   transform: translateY(0);
 }
 
-@keyframes hero-enter {
-  from { opacity: 0; transform: translateY(28px); }
+@keyframes load-in {
+  from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cursor-blink {
+  50% { opacity: 0; }
 }
 
 @keyframes panel-enter {

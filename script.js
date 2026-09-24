@@ -9,6 +9,46 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
+const typedRole = document.getElementById('typedRole');
+const heroRoles = ['Öğrenci Geliştirici', 'Ürün Tasarımcısı', '3D Artist', 'Teknofest Finalisti'];
+
+if (typedRole) {
+  if (prefersReducedMotion.matches) {
+    typedRole.textContent = heroRoles[0];
+  } else {
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    const typeTick = () => {
+      const currentRole = heroRoles[roleIndex];
+
+      if (!deleting) {
+        charIndex += 1;
+        typedRole.textContent = currentRole.slice(0, charIndex);
+        if (charIndex === currentRole.length) {
+          deleting = true;
+          setTimeout(typeTick, 1600);
+          return;
+        }
+        setTimeout(typeTick, 70);
+      } else {
+        charIndex -= 1;
+        typedRole.textContent = currentRole.slice(0, charIndex);
+        if (charIndex === 0) {
+          deleting = false;
+          roleIndex = (roleIndex + 1) % heroRoles.length;
+          setTimeout(typeTick, 400);
+          return;
+        }
+        setTimeout(typeTick, 35);
+      }
+    };
+
+    setTimeout(typeTick, 1300);
+  }
+}
+
 const scrollProgress = document.getElementById('scrollProgress');
 const heroAurora = document.querySelector('.hero-aurora');
 let scrollTicking = false;
